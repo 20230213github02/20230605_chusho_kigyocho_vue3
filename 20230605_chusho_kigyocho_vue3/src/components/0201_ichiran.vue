@@ -1,5 +1,5 @@
 <template>
-
+    <div>fwe</div>
 </template>
 <script>
 import axios from 'axios';
@@ -13,6 +13,8 @@ export default {
     },
     mounted(){
         axios.get('http://localhost:8815/Application/all').then(response =>{
+            // for test add by ZHY
+            console.log(response)
             if (response.getState == '200'){
                 this.applications = response.getData;
 
