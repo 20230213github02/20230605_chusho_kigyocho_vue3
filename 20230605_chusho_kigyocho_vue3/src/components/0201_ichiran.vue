@@ -12,7 +12,14 @@ export default {
         }
     },
     mounted(){
+        axios.get('http://localhost:8815/Application/all').then(response =>{
+            if (response.getState == '200'){
+                this.applications = response.getData;
 
+                //for test add by ZHY
+                console.log(this.applications);
+            }
+        })
     },
     methods: {
 
