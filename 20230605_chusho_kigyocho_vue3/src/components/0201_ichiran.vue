@@ -9,7 +9,7 @@
             {{ notification }}
         </li> -->
         <el-form>
-            
+
         </el-form>
         <div>
             {{ applicationPageCount }}
@@ -20,28 +20,28 @@
 import axios from 'axios';
 
 export default {
-    data(){
-        return{
-            applications : '',
-            notifacations : '',
+    data() {
+        return {
+            applications: '',
+            notifacations: '',
             applicationPageCount: '',
             applicationPageSize: 10
         }
     },
-    mounted(){
-        axios.get('http://localhost:8815/Application/all').then(response =>{
+    mounted() {
+        axios.get('http://localhost:8815/Application/all').then(response => {
             // for test add by ZHY
             // console.log(response)
-            if (response.status == '200'){
+            if (response.status == '200') {
                 this.applications = response.data.data;
 
                 //for test add by ZHY
                 // console.log(this.applications);
             }
         });
-        axios.get('http://localhost:8815/Notification/all').then(response =>{
+        axios.get('http://localhost:8815/Notification/all').then(response => {
             // console.log(response);
-            if(response.status == '200'){
+            if (response.status == '200') {
                 this.notifacations = response.data.data;
                 // console.log(this.notifacations);
             }
@@ -50,15 +50,13 @@ export default {
 
     },
     methods: {
-        getApplicationPage(pageNum){
-            axios.get('http://localhost:8815/Application/page/'+pageNum+'/'+this.applicationPageSize).then(response =>{
-            console.log(response);
-            this.applicationPageCount = response.data.pages;
-        })
+        getApplicationPage(pageNum) {
+            axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + this.applicationPageSize).then(response => {
+                console.log(response);
+                this.applicationPageCount = response.data.pages;
+            })
         }
     }
 }
 </script>
-<style>
-
-</style>
+<style></style>
