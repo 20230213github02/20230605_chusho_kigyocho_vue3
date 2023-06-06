@@ -24,7 +24,8 @@ export default {
         return{
             applications : '',
             notifacations : '',
-            applicationPageCount: ''
+            applicationPageCount: '',
+            applicationPageSize: 10
         }
     },
     mounted(){
@@ -45,13 +46,16 @@ export default {
                 // console.log(this.notifacations);
             }
         });
-        axios.get('http://localhost:8815/Application/page/1/10').then(response =>{
+        this.getApplicationPage(1);
+
+    },
+    methods: {
+        getApplicationPage(pageNum){
+            axios.get('http://localhost:8815/Application/page/'+pageNum+'/'+this.applicationPageSize).then(response =>{
             console.log(response);
             this.applicationPageCount = response.data.pages;
         })
-    },
-    methods: {
-
+        }
     }
 }
 </script>
