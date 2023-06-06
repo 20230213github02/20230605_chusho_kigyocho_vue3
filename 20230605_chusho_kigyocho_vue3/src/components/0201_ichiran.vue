@@ -2,15 +2,18 @@
     <div>fwe</div>
     <div>
         <h1></h1>
-        <li v-for="application in applications" :key="application.appUketsukeNo">
+        <!-- <li v-for="application in applications" :key="application.appUketsukeNo">
             {{ application }}
-        </li>
-        <li v-for="notification in notifacations" :key="notification.ntcID">
+        </li> -->
+        <!-- <li v-for="notification in notifacations" :key="notification.ntcID">
             {{ notification }}
-        </li>
+        </li> -->
         <el-form>
             
         </el-form>
+        <div>
+            {{ applicationPageCount }}
+        </div>
     </div>
 </template>
 <script>
@@ -20,26 +23,31 @@ export default {
     data(){
         return{
             applications : '',
-            notifacations : ''
+            notifacations : '',
+            applicationPageCount: ''
         }
     },
     mounted(){
         axios.get('http://localhost:8815/Application/all').then(response =>{
             // for test add by ZHY
-            console.log(response)
+            // console.log(response)
             if (response.status == '200'){
                 this.applications = response.data.data;
 
                 //for test add by ZHY
-                console.log(this.applications);
+                // console.log(this.applications);
             }
         });
         axios.get('http://localhost:8815/Notification/all').then(response =>{
-            console.log(response);
+            // console.log(response);
             if(response.status == '200'){
                 this.notifacations = response.data.data;
-                console.log(this.notifacations);
+                // console.log(this.notifacations);
             }
+        });
+        axios.get('http://localhost:8815/Application/page/1/10').then(response =>{
+            console.log(response);
+            this.applicationPageCount = response.data.pages;
         })
     },
     methods: {
