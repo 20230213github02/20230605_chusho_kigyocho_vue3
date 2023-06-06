@@ -2,7 +2,11 @@
     <div>fwe</div>
     <div>
         <h1></h1>
+        <li v-for="application in applications" :key="application.appUketsukeNo">
+            {{ application }}
+        </li>
         <el-form>
+            
         </el-form>
     </div>
 </template>
