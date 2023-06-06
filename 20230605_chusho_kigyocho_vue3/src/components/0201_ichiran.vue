@@ -14,10 +14,19 @@
         <div>
             {{ applicationPageCount }}
         </div>
+        <div class="demo-pagination-block">
+            <div class="demonstration">All combined</div>
+            <el-pagination v-model:current-page="currentPage" v-model:page-size="applicationPageCount"
+                :page-sizes="[10, 20, 50, 100, 200, 500]" :small="small" :disabled="disabled" :background="background"
+                layout="total, sizes, prev, pager, next, jumper" :total="applicationPageCount" @size-change="handleSizeChange"
+                @current-change="handleCurrentChange" />
+        </div>
     </div>
 </template>
 <script>
 import axios from 'axios';
+// import { ref } from 'vue'
+
 
 export default {
     data() {
@@ -25,7 +34,8 @@ export default {
             applications: '',
             notifacations: '',
             applicationPageCount: '',
-            applicationPageSize: 10
+            applicationPageSize: 10,
+            currentPage : 1 
         }
     },
     mounted() {
@@ -55,7 +65,8 @@ export default {
                 console.log(response);
                 this.applicationPageCount = response.data.pages;
             })
-        }
+        },
+        
     }
 }
 </script>
