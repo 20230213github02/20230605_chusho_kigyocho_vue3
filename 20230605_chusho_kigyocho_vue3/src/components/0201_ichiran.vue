@@ -14,36 +14,36 @@
         <div>
             {{ applicationPageCount }}
         </div>
-        <div class="demo-pagination-block">
+        <!-- <div class="demo-pagination-block">
             <div class="demonstration">All combined</div>
             <el-pagination v-model:current-page="currentPage" v-model:page-size="applicationPageCount"
                 :page-sizes="[10, 20, 50, 100, 200, 500]" :small="small" :disabled="disabled" :background="background"
                 layout="total, sizes, prev, pager, next, jumper" :total="applicationPageCount" @size-change="handleSizeChange"
                 @current-change="handleCurrentChange" />
-        </div>
+        </div> -->
     </div>
 </template>
 <script setup>
 import axios from 'axios';
 import { onMounted } from 'vue';
-// import { ref } from 'vue'
+import { ref } from 'vue'
 
-const application = '';
-const notifacations = '';
-const applicationPageCount = '';
-const applicationPageSize= 10;
-const currentPage = 1;
+const applications = ref('');
+const notifacations = ref('');
+const applicationPageCount = ref('');
+const applicationPageSize= ref(10);
+// const currentPage = ref(1);
 const getApplicationPage = (pageNum) => {
-            axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + this.applicationPageSize).then(response => {
+            axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + applicationPageSize.value).then(response => {
                 console.log(response);
-                this.applicationPageCount = response.data.pages;
+                applicationPageCount.value = response.data.pages;
             })
         };
-onMounted(axios.get('http://localhost:8815/Application/all').then(response => {
+onMounted(()=>{axios.get('http://localhost:8815/Application/all').then(response => {
             // for test add by ZHY
             // console.log(response)
             if (response.status == '200') {
-                this.applications = response.data.data;
+                applications.value = response.data.data;
 
                 //for test add by ZHY
                 // console.log(this.applications);
@@ -52,11 +52,11 @@ onMounted(axios.get('http://localhost:8815/Application/all').then(response => {
         axios.get('http://localhost:8815/Notification/all').then(response => {
             // console.log(response);
             if (response.status == '200') {
-                this.notifacations = response.data.data;
+                notifacations.value = response.data.data;
                 // console.log(this.notifacations);
             }
         });
-        this.getApplicationPage(1);
+        getApplicationPage(1);}
     );
 
 // export default {
@@ -72,7 +72,7 @@ onMounted(axios.get('http://localhost:8815/Application/all').then(response => {
     //         })
     //     },
         
-    }
-}
+//     }
+// }
 </script>
 <style></style>
