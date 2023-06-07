@@ -28,7 +28,7 @@
           〒&nbsp;&nbsp;<input
             type="text "
             v-model="aPLAddressYubinNo3"
-            @input="validateZipCode"
+            @input="validateZipCodeAndAddress"
             style="width: 50px;border-radius: 6px;
               border-color: rgb(240, 79, 79);
             "
@@ -36,7 +36,7 @@
           />&nbsp;&nbsp;-&nbsp;&nbsp;<input
             type="text"
             v-model="aPLAddressYubinNo4"
-            @input="validateAddress"
+            @input="validateZipCodeAndAddress"
             style="width: 50px"
             maxlength="4"
           /><span
@@ -470,27 +470,35 @@ export default {
         this.isNameworry = false;
       }
     },
-    validateZipCode() {
-      const pattern = /^\d{1,3}$/;
-      if (
-        !pattern.test(this.aPLAddressYubinNo3) ||
-        this.aPLAddressYubinNo3.length !== 3
-      ) {
-        this.aPLAddressYubinNo3worry = true;
-      } else {
-        this.aPLAddressYubinNo3worry = false;
-      }
-    },
-    validateAddress() {
-      const pattern = /^\d{1,4}$/;
-      if (
-        !pattern.test(this.aPLAddressYubinNo4) ||
-        this.aPLAddressYubinNo4.length !== 4 
-      ) {
-        this.aPLAddressYubinNo4worry = true;
-      } else {
-        this.aPLAddressYubinNo4worry = false;
-      }
+    // validateZipCode() {
+    //   const pattern = /^\d{1,3}$/;
+    //   if (
+    //     !pattern.test(this.aPLAddressYubinNo3) ||
+    //     this.aPLAddressYubinNo3.length !== 3
+    //   ) {
+    //     this.aPLAddressYubinNo3worry = true;
+    //   } else {
+    //     this.aPLAddressYubinNo3worry = false;
+    //   }
+    // },
+    // validateAddress() {
+    //   const pattern = /^\d{1,4}$/;
+    //   if (
+    //     !pattern.test(this.aPLAddressYubinNo4) ||
+    //     this.aPLAddressYubinNo4.length !== 4 
+    //   ) {
+    //     this.aPLAddressYubinNo4worry = true;
+    //   } else {
+    //     this.aPLAddressYubinNo4worry = false;
+    //   }
+    // },
+    validateZipCodeAndAddress(){
+      const pattern1 = /^\d{3}$/;
+      const pattern2 = /^\d{4}$/;
+      this.aPLAddressYubinNo3worry =!pattern1.test(this.aPLAddressYubinNo3); 
+      this.aPLAddressYubinNo4worry = !pattern2.test(this.aPLAddressYubinNo4);
+
+      
     },
     fetchAddress() {
       if (this.aPLAddressYubinNo3 && this.aPLAddressYubinNo4) {
