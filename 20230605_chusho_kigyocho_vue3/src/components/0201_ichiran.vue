@@ -1,79 +1,81 @@
 <template>
-    <div>fwe</div>
+  <div class="flex items-center mb-4">
+    <el-radio-group v-model="small" class="mr-4">
+      <el-radio-button :label="false">default</el-radio-button>
+      <el-radio-button :label="true">small</el-radio-button>
+    </el-radio-group>
     <div>
-        <h1></h1>
-        <!-- <li v-for="application in applications" :key="application.appUketsukeNo">
-            {{ application }}
-        </li> -->
-        <!-- <li v-for="notification in notifacations" :key="notification.ntcID">
-            {{ notification }}
-        </li> -->
-        <el-form>
-
-        </el-form>
-        <div>
-            {{ applicationPageCount }}
-        </div>
-        <!-- <div class="demo-pagination-block">
-            <div class="demonstration">All combined</div>
-            <el-pagination v-model:current-page="currentPage" v-model:page-size="applicationPageCount"
-                :page-sizes="[10, 20, 50, 100, 200, 500]" :small="small" :disabled="disabled" :background="background"
-                layout="total, sizes, prev, pager, next, jumper" :total="applicationPageCount" @size-change="handleSizeChange"
-                @current-change="handleCurrentChange" />
-        </div> -->
+      background:
+      <el-switch v-model="background" class="ml-2" />
     </div>
+    <div class="ml-4">
+      disabled: <el-switch v-model="disabled" class="ml-2" />
+    </div>
+  </div>
+
+  <hr class="my-4" />
+
+  <div class="demo-pagination-block">
+    <div class="demonstration">Total item count</div>
+    <el-pagination
+      v-model:current-page="currentPage1"
+      :page-size="100"
+      :small="small"
+      :disabled="disabled"
+      :background="background"
+      layout="total, prev, pager, next"
+      :total="1000"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
+  <div class="demo-pagination-block">
+    <div class="demonstration">Change page size</div>
+    <el-pagination
+      v-model:current-page="currentPage2"
+      v-model:page-size="pageSize2"
+      :page-sizes="[100, 200, 300, 400]"
+      :small="small"
+      :disabled="disabled"
+      :background="background"
+      layout="sizes, prev, pager, next"
+      :total="1000"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
+  <div class="demo-pagination-block">
+    <div class="demonstration">Jump to</div>
+    <el-pagination
+      v-model:current-page="currentPage3"
+      v-model:page-size="pageSize3"
+      :small="small"
+      :disabled="disabled"
+      :background="background"
+      layout="prev, pager, next, jumper"
+      :total="1000"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
+  <div class="demo-pagination-block">
+    <div class="demonstration">All combined</div>
+    <el-pagination
+      v-model:current-page="currentPage4"
+      v-model:page-size="pageSize4"
+      :page-sizes="[100, 200, 300, 400]"
+      :small="small"
+      :disabled="disabled"
+      :background="background"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
 </template>
-<script setup lang="ts">
-import axios from 'axios';
-import { onMounted } from 'vue';
+<script lang="ts" setup>
 import { ref } from 'vue'
-
-const applications = ref('');
-const notifacations = ref('');
-const applicationPageCount = ref('');
-const applicationPageSize= ref(10);
-// const currentPage = ref(1);
-const getApplicationPage = (pageNum) => {
-            axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + applicationPageSize.value).then(response => {
-                console.log(response);
-                applicationPageCount.value = response.data.pages;
-            })
-        };
-onMounted(()=>{axios.get('http://localhost:8815/Application/all').then(response => {
-            // for test add by ZHY
-            // console.log(response)
-            if (response.status == 200) {
-                applications.value = response.data.data;
-
-                //for test add by ZHY
-                // console.log(this.applications);
-            }
-        });
-        axios.get('http://localhost:8815/Notification/all').then(response => {
-            // console.log(response);
-            if (response.status == 200) {
-                notifacations.value = response.data.data;
-                // console.log(this.notifacations);
-            }
-        });
-        getApplicationPage(1);}
-    );
-
-// export default {
-//     mounted() {
-        
-
-//     },
-    // methods: {
-    //     getApplicationPage(pageNum) {
-    //         axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + this.applicationPageSize).then(response => {
-    //             console.log(response);
-    //             this.applicationPageCount = response.data.pages;
-    //         })
-    //     },
-        
-//     }
-// }
 
 const currentPage1 = ref(5)
 const currentPage2 = ref(5)
@@ -93,4 +95,12 @@ const handleCurrentChange = (val: number) => {
   console.log(`current page: ${val}`)
 }
 </script>
-<style></style>
+
+<style scoped>
+.demo-pagination-block + .demo-pagination-block {
+  margin-top: 10px;
+}
+.demo-pagination-block .demonstration {
+  margin-bottom: 16px;
+}
+</style>
