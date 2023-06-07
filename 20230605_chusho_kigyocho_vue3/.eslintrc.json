@@ -6,11 +6,12 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:vue/vue3-essential"
+        "plugin:vue/vue3-essential",
+        "@vue/typescript/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
-        "parser": "@typescript-eslint/parser",
+        // "parser": "@typescript-eslint/parser",
         "sourceType": "module"
     },
     "plugins": [
