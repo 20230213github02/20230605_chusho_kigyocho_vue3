@@ -23,21 +23,16 @@
         </div>
     </div>
 </template>
-<script>
+<script setup>
 import axios from 'axios';
 // import { ref } from 'vue'
 
-
+const application = '';
+const notifacations = '';
+const applicationPageCount = '';
+const applicationPageSize= 10;
+const currentPage = 1;
 export default {
-    data() {
-        return {
-            applications: '',
-            notifacations: '',
-            applicationPageCount: '',
-            applicationPageSize: 10,
-            currentPage : 1 
-        }
-    },
     mounted() {
         axios.get('http://localhost:8815/Application/all').then(response => {
             // for test add by ZHY
