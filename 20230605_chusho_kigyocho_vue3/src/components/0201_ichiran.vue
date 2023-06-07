@@ -42,7 +42,7 @@ const getApplicationPage = (pageNum) => {
 onMounted(()=>{axios.get('http://localhost:8815/Application/all').then(response => {
             // for test add by ZHY
             // console.log(response)
-            if (response.status == '200') {
+            if (response.status == 200) {
                 applications.value = response.data.data;
 
                 //for test add by ZHY
@@ -51,7 +51,7 @@ onMounted(()=>{axios.get('http://localhost:8815/Application/all').then(response 
         });
         axios.get('http://localhost:8815/Notification/all').then(response => {
             // console.log(response);
-            if (response.status == '200') {
+            if (response.status == 200) {
                 notifacations.value = response.data.data;
                 // console.log(this.notifacations);
             }
