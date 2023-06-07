@@ -25,6 +25,7 @@
 </template>
 <script setup>
 import axios from 'axios';
+import { onMounted } from 'vue';
 // import { ref } from 'vue'
 
 const application = '';
@@ -32,9 +33,13 @@ const notifacations = '';
 const applicationPageCount = '';
 const applicationPageSize= 10;
 const currentPage = 1;
-export default {
-    mounted() {
-        axios.get('http://localhost:8815/Application/all').then(response => {
+const getApplicationPage = (pageNum) => {
+            axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + this.applicationPageSize).then(response => {
+                console.log(response);
+                this.applicationPageCount = response.data.pages;
+            })
+        };
+onMounted(axios.get('http://localhost:8815/Application/all').then(response => {
             // for test add by ZHY
             // console.log(response)
             if (response.status == '200') {
@@ -52,15 +57,20 @@ export default {
             }
         });
         this.getApplicationPage(1);
+    );
 
-    },
-    methods: {
-        getApplicationPage(pageNum) {
-            axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + this.applicationPageSize).then(response => {
-                console.log(response);
-                this.applicationPageCount = response.data.pages;
-            })
-        },
+// export default {
+//     mounted() {
+        
+
+//     },
+    // methods: {
+    //     getApplicationPage(pageNum) {
+    //         axios.get('http://localhost:8815/Application/page/' + pageNum + '/' + this.applicationPageSize).then(response => {
+    //             console.log(response);
+    //             this.applicationPageCount = response.data.pages;
+    //         })
+    //     },
         
     }
 }
