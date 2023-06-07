@@ -23,7 +23,7 @@
         </div> -->
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import axios from 'axios';
 import { onMounted } from 'vue';
 import { ref } from 'vue'
@@ -74,5 +74,23 @@ onMounted(()=>{axios.get('http://localhost:8815/Application/all').then(response 
         
 //     }
 // }
+
+const currentPage1 = ref(5)
+const currentPage2 = ref(5)
+const currentPage3 = ref(5)
+const currentPage4 = ref(4)
+const pageSize2 = ref(100)
+const pageSize3 = ref(100)
+const pageSize4 = ref(100)
+const small = ref(false)
+const background = ref(false)
+const disabled = ref(false)
+
+const handleSizeChange = (val: number) => {
+  console.log(`${val} items per page`)
+}
+const handleCurrentChange = (val: number) => {
+  console.log(`current page: ${val}`)
+}
 </script>
 <style></style>
